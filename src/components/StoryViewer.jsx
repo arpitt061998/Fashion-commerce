@@ -4,38 +4,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/free-mode';  
-import { stories} from "../data/storyData";
+import { stories } from "../data/storyData";
 import { useState } from "react";
 import MediaContainer from "./MediaContainer";
-
-const ProgressBar = ({ index, active, completed }) => {
-    return (
-        <div className="h-1 bg-gray-300 flex-1 mx-0.5">
-            <div
-                className={`h-full transition-all ${completed ? 'w-full' : active ? 'animate-progress' : 'w-0'}`}
-                style={{
-                    backgroundColor: 'white',
-                    animation: active ? 'progress 3s linear forwards' : 'none'
-                }}
-            />
-        </div>
-    );
-};
-
-const MultiProgressBar = ({ total, current }) => {
-    return (
-        <div className="flex w-full gap-1 px-2 py-2 absolute top-0 z-10">
-            {[...Array(total)].map((_, index) => (
-                <ProgressBar
-                    key={index}
-                    index={index}
-                    active={index === current}
-                    completed={index < current}
-                />
-            ))}
-        </div>
-    );
-};
+import MultiProgressBar from "./MultiProgressBar";
 
 const StoryViewer = () => {
     const [activeStoryIndex, setActiveStoryIndex] = useState(0); 
