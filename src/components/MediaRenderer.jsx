@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
+import ProductInfo from './ProductInfo';
 
 const MediaRenderer = ({ mediaContent, onDurationChange, onTimeUpdate, isActive }) => {
     const [muted, setMuted] = useState(true);
@@ -60,12 +61,17 @@ const MediaRenderer = ({ mediaContent, onDurationChange, onTimeUpdate, isActive 
                     />
                     <button 
                         onClick={handleMuteToggle} 
-                        className="absolute bottom-4 right-2 bg-gray-800 text-white p-2 rounded"
+                        className="absolute bottom-[9.5rem] right-2 bg-gray-800 text-white p-2 rounded"
                     >
                         {muted ? <VolumeX size={24} /> : <Volume2 size={24} />}
                     </button>
                 </div>
             )}
+            <div className={`absolute bottom-4 left-2 right-2 max-w-sm p-2 rounded shadow-lg overflow-x-auto flex ${mediaContent.products.length === 1 ? 'justify-center' : 'space-x-4'}`}>
+                {mediaContent.products.map(product => (
+                    <ProductInfo key={product.id} product={product} />
+                ))}
+            </div>
         </div>
     )
 }

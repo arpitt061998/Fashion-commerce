@@ -1,4 +1,3 @@
-
 export const stories = [
     {
         id: 'look1',
@@ -18,6 +17,12 @@ export const stories = [
                     id: 'prod2', 
                     name: 'Sandals', 
                     price: 49.99, 
+                    imageCoords: { x: 30, y: 90 } 
+                },
+                { 
+                    id: 'prod11', 
+                    name: 'Bean bag', 
+                    price: 59.99, 
                     imageCoords: { x: 30, y: 90 } 
                 }
             ]
@@ -60,10 +65,16 @@ export const stories = [
             id: "storyId1",
             products: [
             { 
-                id: 'prod4', 
+                id: 'prod7', 
                 name: 'Winter Coat', 
                 price: 199.99, 
                 imageCoords: { x: 40, y: 60 } 
+            },
+            { 
+                id: 'prod8', 
+                name: 'Winter Hat', 
+                price: 29.99, 
+                imageCoords: { x: 30, y: 90 } 
             }
             ]
         }
