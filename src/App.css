@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .swiper-slide {
-    height: 100vh !important;
+    height: 100lvh !important;
 }
 
 @keyframes progress {
