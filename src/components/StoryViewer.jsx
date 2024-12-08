@@ -12,6 +12,16 @@ import MultiProgressBar from "./MultiProgressBar";
 const StoryViewer = () => {
     const [activeStoryIndex, setActiveStoryIndex] = useState(0); 
     const [activeMediaIndex, setActiveMediaIndex] = useState(0); 
+    const [mediaDuration, setMediaDuration] = useState(5); // Default duration for images
+    const [currentTime, setCurrentTime] = useState(0);
+
+    const handleDurationChange = (duration) => {
+        setMediaDuration(duration);
+    };
+
+    const handleTimeUpdate = (time) => {
+        setCurrentTime(time);
+    };
 
     return (
         <div className="story-viewer-container w-full max-w-md mx-auto h-screen">
@@ -21,6 +31,7 @@ const StoryViewer = () => {
                 onSlideChange={(swiper) => {
                     setActiveStoryIndex(swiper.activeIndex); 
                     setActiveMediaIndex(0); 
+                    setMediaDuration(5); // Reset to default duration for images
                 }}
                 touchEventsTarget="wrapper"
                 touchRatio={1.5}
@@ -32,25 +43,34 @@ const StoryViewer = () => {
                         <MultiProgressBar
                             total={story.mediaItems.length}
                             current={activeMediaIndex}
+                            duration={mediaDuration}
                         />
                         <Swiper
                             slidesPerView={1}
                             direction="horizontal"
                             onSlideChange={(swiper) => {
                                 setActiveMediaIndex(swiper.activeIndex); 
+                                const currentMedia = story.mediaItems[swiper.activeIndex];
+            
+                                setMediaDuration(currentMedia.type === 'image' ? 5 : currentMedia.duration || 5); // Set duration based on media type
                             }}
                             initialSlide={activeMediaIndex}
                             scrollbar={{ draggable: true }}
                             autoplay={{
-                                delay: 3000,
+                                delay: mediaDuration * 1000,
                                 disableOnInteraction: false,
                             }}
                             modules={[Autoplay, Scrollbar, Navigation, Pagination]}
                             className="swiper-container"
                         >
-                            {story.mediaItems.map((mediaItem) => (
+                            {story.mediaItems.map((mediaItem, mediaIndex) => (
                                 <SwiperSlide key={mediaItem.id}>
-                                    <MediaContainer mediaContent={mediaItem} />
+                                    <MediaContainer 
+                                        mediaContent={mediaItem} 
+                                        onDurationChange={handleDurationChange}
+                                        onTimeUpdate={handleTimeUpdate}
+                                        isActive={mediaIndex === activeMediaIndex}
+                                    />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

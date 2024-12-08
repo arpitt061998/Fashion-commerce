@@ -34,6 +34,20 @@ export const stories = [
                     imageCoords: { x: 60, y: 80 } 
                 }
             ]
+        },
+        {
+            type: 'video',
+            url: 'assets/videos/video2.mp4',
+            id: "storyId3",
+            products: [
+                { 
+                    id: 'prod4', 
+                    name: 'Winter Outfit', 
+                    price: 320.99, 
+                    imageCoords: { x: 60, y: 80 } 
+                }
+            ],
+            duration: 13
         }
         ]
     },
