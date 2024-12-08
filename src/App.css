@@ -5,3 +5,15 @@
 .swiper-slide {
     height: 100vh !important;
 }
+
+@keyframes progress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+.animate-progress {
+    width: 0;
+}
+.swiper-container {
+    height: 100%;
+    width: 100%;
+}

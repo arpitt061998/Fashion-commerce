@@ -15,17 +15,6 @@ const StoryViewer = () => {
 
     return (
         <div className="story-viewer-container w-full max-w-md mx-auto h-screen">
-            <style>
-                {`
-                @keyframes progress {
-                    from { width: 0; }
-                    to { width: 100%; }
-                }
-                .animate-progress {
-                    width: 0;
-                }
-                `}
-            </style>
             <Swiper
                 slidesPerView={1}
                 direction="vertical"
@@ -33,7 +22,10 @@ const StoryViewer = () => {
                     setActiveStoryIndex(swiper.activeIndex); 
                     setActiveMediaIndex(0); 
                 }}
-                modules={[Scrollbar]}
+                touchEventsTarget="wrapper"
+                touchRatio={1.5}
+                modules={[Scrollbar, Navigation, Pagination]}
+                className="swiper-container"
             >
                 {stories.map((story, storyIndex) => (
                     <SwiperSlide key={story.id}>
@@ -54,6 +46,7 @@ const StoryViewer = () => {
                                 disableOnInteraction: false,
                             }}
                             modules={[Autoplay, Scrollbar, Navigation, Pagination]}
+                            className="swiper-container"
                         >
                             {story.mediaItems.map((mediaItem) => (
                                 <SwiperSlide key={mediaItem.id}>
