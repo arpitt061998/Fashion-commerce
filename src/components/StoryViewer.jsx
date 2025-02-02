@@ -12,8 +12,9 @@ import MultiProgressBar from "./MultiProgressBar";
 const StoryViewer = () => {
     const [activeStoryIndex, setActiveStoryIndex] = useState(0); 
     const [activeMediaIndex, setActiveMediaIndex] = useState(0); 
-    const [mediaDuration, setMediaDuration] = useState(5); // Default duration for images
+    const [mediaDuration, setMediaDuration] = useState(5); 
     const [currentTime, setCurrentTime] = useState(0);
+    const [visibleProductIndex, setVisibleProductIndex] = useState(null);
 
     const handleDurationChange = (duration) => {
         setMediaDuration(duration);
@@ -21,6 +22,10 @@ const StoryViewer = () => {
 
     const handleTimeUpdate = (time) => {
         setCurrentTime(time);
+    };
+
+    const handleProductButtonClick = (index) => {
+        setVisibleProductIndex(prev => prev === index ? null : index);
     };
 
     return (
@@ -31,7 +36,8 @@ const StoryViewer = () => {
                 onSlideChange={(swiper) => {
                     setActiveStoryIndex(swiper.activeIndex); 
                     setActiveMediaIndex(0); 
-                    setMediaDuration(5); // Reset to default duration for images
+                    setMediaDuration(5); 
+                    setVisibleProductIndex(null);
                 }}
                 touchEventsTarget="wrapper"
                 touchRatio={1.5}
@@ -52,7 +58,8 @@ const StoryViewer = () => {
                                 setActiveMediaIndex(swiper.activeIndex); 
                                 const currentMedia = story.mediaItems[swiper.activeIndex];
             
-                                setMediaDuration(currentMedia.type === 'image' ? 5 : currentMedia.duration || 5); // Set duration based on media type
+                                setMediaDuration(currentMedia.type === 'image' ? 5 : currentMedia.duration || 5); 
+                                setVisibleProductIndex(null);
                             }}
                             initialSlide={activeMediaIndex}
                             scrollbar={{ draggable: true }}
@@ -70,6 +77,8 @@ const StoryViewer = () => {
                                         onDurationChange={handleDurationChange}
                                         onTimeUpdate={handleTimeUpdate}
                                         isActive={mediaIndex === activeMediaIndex}
+                                        visibleProductIndex={visibleProductIndex}
+                                        onProductButtonClick={handleProductButtonClick}
                                     />
                                 </SwiperSlide>
                             ))}

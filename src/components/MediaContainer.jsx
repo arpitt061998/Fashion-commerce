@@ -1,6 +1,6 @@
 import MediaRenderer from "./MediaRenderer";
 
-const MediaContainer = ({ mediaContent, onDurationChange, onTimeUpdate, isActive }) => {
+const MediaContainer = ({ mediaContent, onDurationChange, onTimeUpdate, isActive, visibleProductIndex, onProductButtonClick }) => {
     if (!mediaContent) return null;
     
     return (
@@ -10,9 +10,11 @@ const MediaContainer = ({ mediaContent, onDurationChange, onTimeUpdate, isActive
                 onDurationChange={onDurationChange} 
                 onTimeUpdate={onTimeUpdate}
                 isActive={isActive}
+                visibleProductIndex={visibleProductIndex}
+                onProductButtonClick={onProductButtonClick}
             />
         </div>
-    )
+    );
 };
 
 export default MediaContainer;

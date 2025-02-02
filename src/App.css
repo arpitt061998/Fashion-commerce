@@ -17,3 +17,17 @@
     height: 100%;
     width: 100%;
 }
+
+.swiper-no-swiping {
+    pointer-events: none;
+}
+
+.swiper-no-swiping button,
+.swiper-no-swiping .overflow-x-auto {
+    pointer-events: auto;
+}
+
+.story-viewer-container button,
+.story-viewer-container .overflow-x-auto {
+    z-index: 50;
+}
